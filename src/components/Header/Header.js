@@ -13,19 +13,24 @@ const Header = () => {
 
         <div className="HeaderSelectGroup">
 
-          <select className="HeaderSelect" name="Type" id="">
-            <option value="variable 1">Type 1</option>
-            <option value="variable 2">Type 1</option>
-            <option value="variable 3">Type 1</option>
-            <option value="variable 4">Type 1</option>
-          </select>
-
-          <select className="HeaderSelect" name="Type" id="">
-            <option value="variable 1">Type 1</option>
-            <option value="variable 2">Type 1</option>
-            <option value="variable 3">Type 1</option>
-            <option value="variable 4">Type 1</option>
-          </select>
+          <div className="HeaderSelect">
+            <span>Categories</span>
+            <select name="Type" id="">
+              <option value="variable 1">Type 1</option>
+              <option value="variable 2">Type 1</option>
+              <option value="variable 3">Type 1</option>
+              <option value="variable 4">Type 1</option>
+            </select>
+          </div>
+          <div className="HeaderSelect">
+            <span>Sorting By</span>
+            <select name="Type" id="">
+              <option value="variable 1">Type 1</option>
+              <option value="variable 2">Type 1</option>
+              <option value="variable 3">Type 1</option>
+              <option value="variable 4">Type 1</option>
+            </select>
+          </div>
         </div>
 
       </form>
