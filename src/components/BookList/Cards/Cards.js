@@ -5,10 +5,10 @@ import testCover from './img/test.png'
 const Cards = props => {
   return(
     <div className="Cards">
+      <span className="CardsCategory"><b>Computers</b></span>
       <img src={testCover} className="CardsCover"/>
-      <span className="CardsCategory">Computers</span>
-      <h3 className="CardsTitle">Grokking the alghoritms</h3>
-      <span className="CardsAuthor">Adythia Bhargava</span>
+      <h2 className="CardsTitle">Grokking the alghoritms</h2>
+      <h5 className="CardsAuthor">Adythia Bhargava</h5>
     </div>
   )
 }
