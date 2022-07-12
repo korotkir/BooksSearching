@@ -1,10 +1,13 @@
 .BookList {
   max-width: 1170px;
+  height: 65vh;
   margin: 0 auto;
   padding-top: 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 /*# sourceMappingURL=BookList.css.map */

@@ -1,26 +1,26 @@
 import Cards from './Cards/Cards'
 import './BookList.css'
-import {useEffect, useState} from 'react'
-import {logDOM} from '@testing-library/react'
+import {authorsCalibration, cropTitle} from '../../utility/utility'
+import notFound from './img/not_found.svg'
+import EmptyList from './EmptyList/EmptyList'
 
-const BookList = () => {
-  const [BooksList, setBooksList] = useState(null)
-
-
-  useEffect(() => {
-    fetch('https://www.googleapis.com/books/v1/volumes?q=grokking')
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => setBooksList(data))
-  }, [])
-
+const BookList = (props) => {
   return(
     <div className="BookList">
-      {BooksList.map((el, i, arr) => {
-          return <Cards />
+      {props.BooksList ? props.BooksList.map((el, i, arr) => {
+        const category = el.volumeInfo.categories ||  'Category not specified'
+        const cover = el.volumeInfo.imageLinks  ? el.volumeInfo.imageLinks.thumbnail : notFound
+        const title = cropTitle(el.volumeInfo.title)
+        const authors = el.volumeInfo.authors ? authorsCalibration(el.volumeInfo.authors) : 'Author not specified'
+          return <Cards
+                    key={i}
+                    category={category}
+                    cover={cover}
+                    title={title}
+                    authors={authors}
+          />
         }
-      )}
+      ) : <EmptyList />}
     </div>
   )
 }

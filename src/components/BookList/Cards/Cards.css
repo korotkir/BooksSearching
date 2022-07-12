@@ -1,11 +1,11 @@
 .Cards {
-  width: fit-content;
-  height: fit-content;
+  width: 255px;
+  height: 400px;
   box-shadow: 1px 1px 1px lightgray;
   background: rgba(230, 223, 223, 0.18);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   margin: 10px auto;
   padding: 10px;
 }
@@ -19,8 +19,8 @@
 }
 
 .CardsCover {
-  width: fit-content;
-  height: 250px;
+  width: 128px;
+  height: 207px;
   align-self: center;
   margin-bottom: 10px;
 }
