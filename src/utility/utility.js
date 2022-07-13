@@ -15,8 +15,18 @@ export function cropTitle(title) {
   const words = title.split(' ')
 
  if(words.length > 10) {
-   return words.filter(( _, i) => i < 9).join(' ') + '...'
+   return words.filter(( _, i) => i < 7).join(' ') + '...'
  } else {
    return title
  }
 }
+
+export function cropYear(date) {
+  if (typeof date === 'string'){
+    return date.split('').filter((_, i) => i < 4).join('')
+  } else {
+    return date
+  }
+}
+
+console.log(cropYear('2022-17-08'))

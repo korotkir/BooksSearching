@@ -10,30 +10,41 @@ const Header = (props) => {
       <form  className="HeaderForm" action="">
 
         <div className="HeaderSearch">
-          <input value={props.value} onChange={props.onChange} type="text"/>
+          <input value={props.value} onChange={props.inputChange} type="text"/>
           <button type="submit" onClick={props.search}>Search</button>
         </div>
 
         <div className="HeaderSelectGroup">
 
           <div className="HeaderSelect">
-            <span>Categories</span>
-            <select name="Type" id="">
-              <option value="variable 1">All</option>
-              <option value="variable 2">Art</option>
-              <option value="variable 3">Biography</option>
-              <option value="variable 4">Computers</option>
-              <option value="variable 5">History</option>
-              <option value="variable 6">Medical</option>
-              <option value="variable 7">Poetry</option>
-            </select>
+            <label>
+              Categories
+              <select
+                value={props.category}
+                onChange={props.categoryChange}
+              >
+                <option value="">All</option>
+                <option value="art">Art</option>
+                <option value="biography">Biography</option>
+                <option value="computers">Computers</option>
+                <option value="history">History</option>
+                <option value="medical">Medical</option>
+                <option value="poetry">Poetry</option>
+              </select>
+            </label>
           </div>
           <div className="HeaderSelect">
-            <span>Sorting By</span>
-            <select name="Type" id="">
-              <option value="variable 1">Relevance</option>
-              <option value="variable 2">Newest</option>
-            </select>
+            <label>
+              Sorting by
+              <select
+                value={props.sortingBy}
+                onChange={props.sortingByChange}
+              >
+                <option value="relevance">Relevance</option>
+                <option value="newest">Newest</option>
+              </select>
+            </label>
+
           </div>
         </div>
 

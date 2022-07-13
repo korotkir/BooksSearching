@@ -4,10 +4,8 @@
   margin: 0 auto;
   padding-top: 20px;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
 }
 
 /*# sourceMappingURL=BookList.css.map */
