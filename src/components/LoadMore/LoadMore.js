@@ -1,9 +1,9 @@
 import './LoadMore.css'
 
-const LoadMore = () => {
+const LoadMore = props => {
   return (
     <div className="LoadMore">
-      <button>Load more</button>
+      <button onClick={props.loadMoreHandler}>Load more</button>
     </div>
   )
 }

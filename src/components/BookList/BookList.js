@@ -3,15 +3,18 @@ import './BookList.css'
 import {authorsCalibration, cropTitle, cropYear} from '../../utility/utility'
 import notFound from './img/not_found.svg'
 import EmptyList from '../EmptyList/EmptyList'
+import LoadMore from '../LoadMore/LoadMore'
 
 
 const BookList = (props) => {
+  const data = props.booksList
+
   return (
     <>
-      {props.BooksList
+      {data
         ? <div className="BookList">{
-          props.BooksList.map((el, i) => {
-              const category = el.volumeInfo.categories || 'Category not specified'
+          data.map((el, i) => {
+              //const category = el.volumeInfo.categories || 'Category not specified'
               const cover = el.volumeInfo.imageLinks ? el.volumeInfo.imageLinks.thumbnail : notFound
               const title = cropTitle(el.volumeInfo.title)
               const authors = el.volumeInfo.authors ? authorsCalibration(el.volumeInfo.authors) : 'Author not specified'
@@ -20,7 +23,7 @@ const BookList = (props) => {
 
                 <Cards
                   key={i}
-                  category={category}
+                  //category={category}
                   cover={cover}
                   title={title}
                   authors={authors}
@@ -28,7 +31,12 @@ const BookList = (props) => {
                 />
               )
             }
-          )}</div>
+          )}
+          <LoadMore
+            loadMoreHandler={props.loadMoreHandler}
+          />
+        </div>
+
         : <EmptyList/>}
     </>
   )

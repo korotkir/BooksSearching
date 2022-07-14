@@ -8,4 +8,10 @@
   justify-content: flex-start;
 }
 
+@media (max-width: 1139px) {
+  .BookList {
+    justify-content: center;
+  }
+}
+
 /*# sourceMappingURL=BookList.css.map */

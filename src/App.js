@@ -5,13 +5,19 @@ import LoadMore from './components/LoadMore/LoadMore'
 
 function App() {
 
-  console.log('TOKEN', process.env.REACT_APP_GOOGLE_TOKEN)
-  const [BooksList, setBooksList] = useState(null)
+  const token = process.env.REACT_APP_GOOGLE_TOKEN
+
+  const [booksList, setBooksList] = useState(null)
 
   const [value, setValue] = useState('')
 
   const [sortingBy, setSortingBy] = useState('relevance')
   const [category, setCategory] = useState('')
+
+  const [countItems, setCountItems] = useState(0)
+  const [maxResults, setMaxResults] = useState(30)
+
+  const responseLink = `https://www.googleapis.com/books/v1/volumes?q=${value}+subject:${category}&startIndex=${countItems}&maxResults=${maxResults}&orderBy=${sortingBy}&key=${token}`
 
   const inputChange = (evt) => {
     setValue(evt.target.value)
@@ -20,13 +26,14 @@ function App() {
   const searchHandler = (evt) => {
     evt.preventDefault()
 
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}+subject:${category}&maxResults=30&orderBy=${sortingBy}&key=${process.env.REACT_APP_GOOGLE_TOKEN}`)
+    fetch(responseLink)
       .then((response) => {
         return response.json()
       })
       .then((data) => {
         console.log(data.items)
         setBooksList(data.items)
+        setCountItems(countItems + maxResults)
       })
   }
 
@@ -36,6 +43,19 @@ function App() {
 
   const categoryChange = (evt) => {
     setCategory(evt.target.value)
+  }
+
+  const loadMoreHandler = (evt) => {
+    evt.preventDefault()
+
+    fetch(responseLink)
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        setBooksList([...booksList, ...data.items])
+        setCountItems(countItems + maxResults)
+      })
   }
 
   return (
@@ -50,9 +70,9 @@ function App() {
         categoryChange={categoryChange}
       />
       <BookList
-        BooksList={BooksList}
+        booksList={booksList}
+        loadMoreHandler={loadMoreHandler}
       />
-      <LoadMore />
     </div>
   );
 }

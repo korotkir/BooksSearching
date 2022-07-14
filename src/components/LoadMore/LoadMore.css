@@ -1,12 +1,26 @@
 .LoadMore {
   width: 100%;
+  padding: 30px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
 }
 
 .LoadMore button {
-  background: red;
+  background: lightgray;
+  border: none;
+  width: 200px;
+  height: 50px;
+  color: white;
+  font-size: 16px;
+}
+.LoadMore button:hover {
+  background: slategray;
+  transition: all 0.5s;
+}
+.LoadMore button:active {
+  background: gray;
+  transition: all 0.5s;
 }
 
 /*# sourceMappingURL=LoadMore.css.map */
