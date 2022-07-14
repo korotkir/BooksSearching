@@ -1,0 +1,10 @@
+.Warning {
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: lightgray;
+}
+
+/*# sourceMappingURL=Warning.css.map */

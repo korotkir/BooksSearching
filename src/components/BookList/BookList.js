@@ -2,8 +2,10 @@ import Cards from './Cards/Cards'
 import './BookList.css'
 import {authorsCalibration, cropTitle, cropYear} from '../../utility/utility'
 import notFound from './img/not_found.svg'
-import EmptyList from '../EmptyList/EmptyList'
+import EmptyList from '../Animations/EmptyList/EmptyList'
 import LoadMore from '../LoadMore/LoadMore'
+import Warning from '../Animations/Warning/Warning'
+import {useEffect} from 'react'
 
 
 const BookList = (props) => {
@@ -11,7 +13,7 @@ const BookList = (props) => {
 
   return (
     <>
-      {data
+      {data && props.totalItems
         ? <div className="BookList">{
           data.map((el, i) => {
               //const category = el.volumeInfo.categories || 'Category not specified'
@@ -34,10 +36,12 @@ const BookList = (props) => {
           )}
           <LoadMore
             loadMoreHandler={props.loadMoreHandler}
+            totalItems={props.totalItems}
+            countItems={props.countItems}
           />
         </div>
 
-        : <EmptyList/>}
+        : props.totalItems === 0 ? <Warning/> : <EmptyList/>}
     </>
   )
 }

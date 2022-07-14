@@ -1,7 +1,8 @@
 import Header from './components/Header/Header'
 import BookList from './components/BookList/BookList'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import LoadMore from './components/LoadMore/LoadMore'
+import {logDOM} from '@testing-library/react'
 
 function App() {
 
@@ -14,26 +15,26 @@ function App() {
   const [sortingBy, setSortingBy] = useState('relevance')
   const [category, setCategory] = useState('')
 
-  const [countItems, setCountItems] = useState(0)
-  const [maxResults, setMaxResults] = useState(30)
-
-  const responseLink = `https://www.googleapis.com/books/v1/volumes?q=${value}+subject:${category}&startIndex=${countItems}&maxResults=${maxResults}&orderBy=${sortingBy}&key=${token}`
+  let [countItems, setCountItems] = useState(0)
+  let [totalItems, setTotalItems] = useState(undefined)
+  const maxResults = 30
 
   const inputChange = (evt) => {
     setValue(evt.target.value)
   }
 
   const searchHandler = (evt) => {
+    clear()
     evt.preventDefault()
-
-    fetch(responseLink)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}+subject:${category}&startIndex=0&maxResults=${maxResults}&orderBy=${sortingBy}&key=${token}`)
       .then((response) => {
         return response.json()
       })
       .then((data) => {
-        console.log(data.items)
+        console.log(data)
         setBooksList(data.items)
-        setCountItems(countItems + maxResults)
+        setCountItems(30)
+        setTotalItems(data.totalItems)
       })
   }
 
@@ -48,7 +49,7 @@ function App() {
   const loadMoreHandler = (evt) => {
     evt.preventDefault()
 
-    fetch(responseLink)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}+subject:${category}&startIndex=${countItems}&maxResults=${maxResults}&orderBy=${sortingBy}&key=${token}`)
       .then((response) => {
         return response.json()
       })
@@ -56,6 +57,13 @@ function App() {
         setBooksList([...booksList, ...data.items])
         setCountItems(countItems + maxResults)
       })
+      .catch(error => console.log(error))
+  }
+
+  const clear = () => {
+    setBooksList(null)
+    setCountItems(0)
+    setTotalItems(undefined)
   }
 
   return (
@@ -72,6 +80,8 @@ function App() {
       <BookList
         booksList={booksList}
         loadMoreHandler={loadMoreHandler}
+        totalItems={totalItems}
+        countItems={countItems}
       />
     </div>
   );
