@@ -3,6 +3,7 @@ import './Cards.css'
 
 
 const Cards = props => {
+  console.log('Cards')
   return(
     <div className="Cards">
       <span className="CardsCategory"><b>{props.category}</b></span>

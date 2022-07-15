@@ -1,9 +1,8 @@
+import React from 'react'
 import './Header.modules.css'
-import {useState} from 'react'
 
 const Header = (props) => {
-
-
+  console.log('Header')
 
   return (
     <div className="Header">

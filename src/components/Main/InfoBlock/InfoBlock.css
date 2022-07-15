@@ -1,0 +1,13 @@
+.infoBlock {
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoBlock h1 {
+  padding: 0;
+  margin: 15px 0 0 0;
+}
+
+/*# sourceMappingURL=InfoBlock.css.map */

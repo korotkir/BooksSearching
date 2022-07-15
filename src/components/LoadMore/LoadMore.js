@@ -1,9 +1,17 @@
 import './LoadMore.css'
+import {logDOM} from '@testing-library/react'
 
 const LoadMore = props => {
+  console.log('LoadMore')
   return (
     <div className="LoadMore">
-      <button onClick={props.loadMoreHandler}>Load more ({props.countItems} of {props.totalItems})</button>
+      {
+        props.successLoad
+          ? <span>All books uploaded</span>
+          : <button onClick={props.loadMoreHandler}>
+            Load more
+          </button>
+      }
     </div>
   )
 }
