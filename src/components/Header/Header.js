@@ -2,7 +2,6 @@ import React from 'react'
 import './Header.modules.css'
 
 const Header = (props) => {
-  console.log('Header')
 
   return (
     <div className="Header">
@@ -10,7 +9,7 @@ const Header = (props) => {
 
         <div className="HeaderSearch">
           <input value={props.value} onChange={props.inputChange} type="text"/>
-          <button type="submit" onClick={props.search}>Search</button>
+          <button type="submit" onClick={props.searchHandler}  to="/">Search</button>
         </div>
 
         <div className="HeaderSelectGroup">

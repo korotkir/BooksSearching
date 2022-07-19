@@ -1,10 +1,13 @@
 import './App.css'
-import Header from './components/Header/Header'
 import {useState} from 'react'
 import Main from './components/Main/Main'
+import {Route, Routes, useNavigate} from 'react-router-dom'
+import Book from './components/Book/Book'
+import Layout from './components/Layout/Layout'
 
 function App() {
-  console.log('App')
+  const navigate = useNavigate()
+
   // Google Books API Token
   const token = process.env.REACT_APP_GOOGLE_TOKEN
 
@@ -39,12 +42,13 @@ function App() {
     clear()
     evt.preventDefault()
 
+    navigate('/')
+
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}+subject:${category}&startIndex=0&maxResults=${maxResults}&orderBy=${sortingBy}&key=${token}`)
       .then((response) => {
         return response.json()
       })
       .then((data) => {
-        console.log(data)
         setBooksList(data.items)
         setCountItems(30)
         setTotalItems(data.totalItems)
@@ -87,27 +91,44 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Header
-        search={searchHandler}
-        value={value}
-        inputChange={inputChange}
-        sortingBy={sortingBy}
-        sortingByChange={sortingByChange}
-        category={category}
-        categoryChange={categoryChange}
-      />
-      {/*<Book />*/}
-      <Main
-        booksList={booksList}
-        loadMoreHandler={loadMoreHandler}
-        totalItems={totalItems}
-        countItems={countItems}
-        loading={loading}
-        successLoad={successLoad}
-      />
-    </div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Layout
+                searchHandler={searchHandler}
+                value={value}
+                inputChange={inputChange}
+                sortingBy={sortingBy}
+                sortingByChange={sortingByChange}
+                category={category}
+                categoryChange={categoryChange}
+              />
+            }>
+            <Route
+              index
+              exact
+              element={
+                <Main
+                  booksList={booksList}
+                  loadMoreHandler={loadMoreHandler}
+                  totalItems={totalItems}
+                  countItems={countItems}
+                  loading={loading}
+                  successLoad={successLoad}
+                />
+              }
+            />
+            <Route
+              path="id/:bookId"
+              exact
+              element={
+                <Book />
+              }
+            />
+          </Route>
+        </Routes>
   )
 }
 
-export default App;
+export default App

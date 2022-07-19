@@ -1,0 +1,49 @@
+$backgroundColor: lightgray
+
+.Book
+  max-width: 1170px
+  height: 100% // header height
+  margin: 0 auto
+  //padding-top: 50px
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+  grid-gap: 2vw
+
+.BookCover
+  width: 100%
+  height: 82vh
+  background: $backgroundColor
+  display: flex
+  justify-content: center
+  align-items: center
+
+.BookCover img
+  max-width: 250px
+  margin: 20px
+  box-shadow: 4px -4px 10px 5px gray
+
+.BookInfo
+  display: flex
+  flex-direction: column
+  padding: 50px 20px
+  justify-content: flex-start
+
+.BookCategory
+  color: gray
+  //margin: 50px 0 5px 0
+
+.BookTitle
+  margin: 20px 0 0 0
+
+.BookAuthor
+  margin-top: 10px
+  color: gray
+
+.BookDesc
+  word-break: normal
+  margin-top: 30px
+
+@media all and (max-width: 600px)
+  .BookCover
+    width: 100%
+    height: 100%

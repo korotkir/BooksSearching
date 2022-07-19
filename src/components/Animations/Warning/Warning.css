@@ -1,9 +1,16 @@
 .Warning {
+  height: 82vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: lightgray;
+}
+
+@media all and (max-width: 700px) {
+  .EmptyList {
+    height: 65vh;
+  }
 }
 
 /*# sourceMappingURL=Warning.css.map */

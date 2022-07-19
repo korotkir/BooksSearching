@@ -5,7 +5,6 @@ import InfoBlock from './InfoBlock/InfoBlock'
 import BookList from '../BookList/BookList'
 
 const Main = (props) => {
-  console.log('Main')
   const data = props.booksList
 
   return (
@@ -22,6 +21,7 @@ const Main = (props) => {
               countItems={props.countItems}
               loading={props.loading}
               successLoad={props.successLoad}
+              bookHandler={props.bookHandler}
             />
           </>
         : props.totalItems === 0 ? <Warning/> : <EmptyList/>}

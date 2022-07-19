@@ -1,8 +1,6 @@
 import './LoadMore.css'
-import {logDOM} from '@testing-library/react'
 
 const LoadMore = props => {
-  console.log('LoadMore')
   return (
     <div className="LoadMore">
       {

@@ -1,8 +1,14 @@
 .EmptyList {
-  height: 65vh;
+  height: 82vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media all and (max-width: 700px) {
+  .EmptyList {
+    height: 65vh;
+  }
 }
 
 /*# sourceMappingURL=EmptyList.css.map */
