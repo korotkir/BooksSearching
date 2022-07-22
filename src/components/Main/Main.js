@@ -1,6 +1,6 @@
 import React from 'react'
-import EmptyList from '../Animations/EmptyList/EmptyList'
-import Warning from '../Animations/Warning/Warning'
+import EmptyList from '../../UI/Animations/EmptyList/EmptyList'
+import Warning from '../../UI/Animations/Warning/Warning'
 import InfoBlock from './InfoBlock/InfoBlock'
 import BookList from '../BookList/BookList'
 

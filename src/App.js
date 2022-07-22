@@ -1,93 +1,49 @@
 import './App.css'
-import {useState} from 'react'
 import Main from './components/Main/Main'
 import {Route, Routes, useNavigate} from 'react-router-dom'
 import Book from './components/Book/Book'
 import Layout from './components/Layout/Layout'
+import {useDispatch, useSelector} from 'react-redux'
+import {
+  clear,
+  fetchBookList,
+  loadMoreHandler,
+  setCategory,
+  setSortingBy,
+  setValue
+} from './store/actions/BookListActions'
 
 function App() {
   const navigate = useNavigate()
 
-  // Google Books API Token
-  const token = process.env.REACT_APP_GOOGLE_TOKEN
+  const dispatch = useDispatch()
+  const value = useSelector(state => state.bookList.value)
+  const sortingBy = useSelector(state => state.bookList.sortingBy)
+  const category = useSelector(state => state.bookList.category)
+  const booksList = useSelector(state => state.bookList.booksList)
+  const totalItems = useSelector(state => state.bookList.totalItems)
+  const countItems = useSelector(state => state.bookList.countItems)
+  const loading = useSelector(state => state.bookList.loading)
+  const successLoad = useSelector(state => state.bookList.successLoad)
 
-  // Main array for books items
-  const [booksList, setBooksList] = useState(null)
-
-  // Search input value
-  const [value, setValue] = useState('')
-
-  // State for Sorting & Category
-  const [sortingBy, setSortingBy] = useState('relevance')
-  const [category, setCategory] = useState('')
-
-  // Loaded items right now
-  let [countItems, setCountItems] = useState(0)
-
-  // Total items
-  const maxResults = 30
-  let [totalItems, setTotalItems] = useState(undefined)
-
-  // If true - showed loader
-  let [loading, setLoading] = useState(false)
-
-  // If items empty - true
-  let [successLoad, setSuccessLoad] = useState(false)
-
+  // Оставим функцию, так как UI
   const inputChange = (evt) => {
-    setValue(evt.target.value)
+    dispatch(setValue(evt.target.value))
   }
 
   const searchHandler = (evt) => {
-    clear()
+    dispatch(() => clear())
     evt.preventDefault()
-
     navigate('/')
-
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}+subject:${category}&startIndex=0&maxResults=${maxResults}&orderBy=${sortingBy}&key=${token}`)
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        setBooksList(data.items)
-        setCountItems(30)
-        setTotalItems(data.totalItems)
-      })
+    dispatch(fetchBookList())
   }
 
   const sortingByChange = (evt) => {
-    setSortingBy(evt.target.value)
+    dispatch(setSortingBy(evt.target.value))
   }
 
   const categoryChange = (evt) => {
-    setCategory(evt.target.value)
-  }
-
-  const loadMoreHandler = (evt) => {
-    evt.preventDefault()
-
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}+subject:${category}&startIndex=${countItems}&maxResults=${maxResults}&orderBy=${sortingBy}&key=${token}`)
-      .then((response) => {
-        setLoading(true)
-        return response.json()
-      })
-      .then((data) => {
-        if (!data.items) {
-          setSuccessLoad(true)
-        }
-        setBooksList([...booksList, ...data.items])
-        setCountItems(countItems + maxResults)
-        setLoading(false)
-
-      })
-      .catch(error => console.log(error))
-  }
-
-  const clear = () => {
-    setBooksList(null)
-    setCountItems(0)
-    setTotalItems(undefined)
-    setSuccessLoad(false)
+    dispatch(setCategory(evt.target.value))
   }
 
   return (
@@ -111,7 +67,7 @@ function App() {
               element={
                 <Main
                   booksList={booksList}
-                  loadMoreHandler={loadMoreHandler}
+                  loadMoreHandler={(evt) => dispatch(loadMoreHandler(evt))}
                   totalItems={totalItems}
                   countItems={countItems}
                   loading={loading}
