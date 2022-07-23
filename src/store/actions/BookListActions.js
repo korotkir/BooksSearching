@@ -39,7 +39,6 @@ export const loadMoreHandler = (evt) => {
         if (!data.items) {
           dispatch(setSuccessLoad(true))
         }
-        // dispatch(setBooksList(data.items))
         dispatch(setMoreBooksList(data.items))
         dispatch(setCountItems(maxResults))
         dispatch(setLoading(false))
@@ -59,63 +58,63 @@ export const clear = () => {
 export const setValue = (value) => {
   return {
     type: SET_VALUE,
-    value: value
+    value
   }
 }
 
 export const setBooksList = (items) => {
   return {
     type: SET_BOOKS_LIST,
-    items: items
+    items
   }
 }
 
 export const setMoreBooksList = (items) => {
   return {
     type: SET_MORE_BOOKS_LIST,
-    items: items
+    items
   }
 }
 
 export const setCountItems = (num) => {
   return {
     type: SET_COUNT_ITEMS,
-    num: num
+    num
   }
 }
 
 export const setTotalItems = (total) => {
   return {
     type: SET_TOTAL_ITEMS,
-    total: total
+    total
   }
 }
 
 export const setSuccessLoad = (bool) => {
   return {
     type: SET_SUCCESS_LOAD,
-    bool: bool
+    bool
   }
 }
 
 export const setSortingBy = (value) => {
   return {
     type: SET_SORTING_BY,
-    value: value
+    value
   }
 }
 
 export const setCategory = (value) => {
   return {
     type: SET_CATEGORY,
-    value: value
+    value
   }
 }
 
 export const setLoading = (bool) => {
   return {
     type: SET_LOADING,
-    bool: bool
+    bool
   }
 }
 
