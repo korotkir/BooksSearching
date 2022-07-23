@@ -1,18 +1,18 @@
-import Card from './Cards/Card'
+import Card from './Card/Card'
 import './BookList.css'
-import {authorsCalibration, cropTitle, cropYear} from '../../utility/utility'
+import { authorsCalibration, cropTitle, cropYear } from '../../utility/utility'
 import notFound from './img/not_found.svg'
 import LoadMore from '../LoadMore/LoadMore'
-import {useState} from 'react'
-import {NavLink, useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
-const BookList = (props) => {
-  const data = props.booksList
+const BookList = () => {
+
+  const data = useSelector(state => state.bookList.booksList)
 
   const navigate = useNavigate()
 
   const cardHandler = (book) => {
-    console.log('book id', book.id)
     return navigate(`/id/${book.id}`)
   }
 
@@ -37,13 +37,7 @@ const BookList = (props) => {
               )
             }
           )}
-        <LoadMore
-          loadMoreHandler={props.loadMoreHandler}
-          totalItems={props.totalItems}
-          countItems={props.countItems}
-          loading={props.loading}
-          successLoad={props.successLoad}
-        />
+        <LoadMore />
         </div>
   )
 }

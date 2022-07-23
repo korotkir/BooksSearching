@@ -13,6 +13,7 @@
 .Card:hover {
   box-shadow: 5px 5px 5px lightgray;
   transition: all 0.3s;
+  cursor: pointer;
 }
 
 .CardCover {
