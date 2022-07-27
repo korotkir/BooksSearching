@@ -6,6 +6,7 @@ import {
   SET_TOTAL_ITEMS,
   SET_VALUE
 } from '../actions/actionType'
+import {createReducer} from '@reduxjs/toolkit'
 
 const initialState = {
   booksList: null,
@@ -18,54 +19,15 @@ const initialState = {
   successLoad: false,
 }
 
-export function BookListReducer(state = initialState, action) {
-  switch (action.type) {
-    case SET_VALUE:
-      return {
-        ...state,
-        value: action.value
-      }
-    case SET_BOOKS_LIST:
-      return {
-        ...state,
-        booksList: action.items
-      }
-    case SET_MORE_BOOKS_LIST:
-      return {
-        ...state,
-        booksList: [...state.booksList, ...action.items]
-      }
-    case SET_COUNT_ITEMS:
-      return {
-        ...state,
-        countItems: state.countItems + action.num
-      }
-    case SET_TOTAL_ITEMS:
-      return {
-        ...state,
-        totalItems: action.total
-      }
-    case SET_SUCCESS_LOAD:
-      return {
-        ...state,
-        successLoad: action.bool
-      }
-    case SET_SORTING_BY:
-      return {
-        ...state,
-        sortingBy: action.value
-      }
-    case SET_CATEGORY:
-      return {
-        ...state,
-        category: action.value
-      }
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: action.bool
-      }
-    default:
-      return state
-  }
-}
+export const BookListReducer = createReducer(initialState, builder => {
+  builder
+    .addCase(SET_VALUE, (state, action) => {state.value = action.value})
+    .addCase(SET_BOOKS_LIST, (state, action) => {state.booksList = action.items})
+    .addCase(SET_MORE_BOOKS_LIST, (state, action) => {state.booksList.push(...action.items)})
+    .addCase(SET_COUNT_ITEMS, (state, action) => {state.countItems += action.num})
+    .addCase(SET_TOTAL_ITEMS, (state, action) => {state.totalItems = action.total})
+    .addCase(SET_SUCCESS_LOAD, (state, action) => {state.successLoad = action.bool})
+    .addCase(SET_SORTING_BY, (state, action) => {state.sortingBy = action.value})
+    .addCase(SET_CATEGORY, (state, action) => {state.category = action.value})
+    .addCase(SET_LOADING, (state, action) => {state.loading = action.bool})
+})

@@ -1,23 +1,13 @@
 import {SET_BOOK, SET_LOADER} from '../actions/actionType'
+import {createReducer} from '@reduxjs/toolkit'
 
 const initialState = {
   book: {},
-  loader: false
+  loader: false,
 }
 
-export function BookReducer(state = initialState, action) {
-  switch (action.type) {
-    case SET_BOOK:
-      return {
-        ...state,
-        book: action.value
-      }
-    case SET_LOADER:
-      return {
-        ...state,
-        loader: action.bool
-      }
-    default:
-      return state
-  }
-}
+export const BookReducer = createReducer(initialState, builder => {
+  builder
+    .addCase(SET_BOOK, (state, action) => {state.book = action.value})
+    .addCase(SET_LOADER, (state, action) => {state.loader = action.bool})
+})
