@@ -1,30 +1,22 @@
 import React from 'react'
-import EmptyList from '../Animations/EmptyList/EmptyList'
-import Warning from '../Animations/Warning/Warning'
+import EmptyList from '../../UI/Animations/EmptyList/EmptyList'
+import Warning from '../../UI/Animations/Warning/Warning'
 import InfoBlock from './InfoBlock/InfoBlock'
 import BookList from '../BookList/BookList'
+import {useSelector} from 'react-redux'
 
-const Main = (props) => {
-  const data = props.booksList
+const Main = () => {
+  const data = useSelector(state => state.bookList.booksList)
+  const totalItems = useSelector(state => state.bookList.totalItems)
 
   return (
     <>
-      {data && props.totalItems
+      {data && totalItems
         ? <>
-            <InfoBlock
-              totalItems={props.totalItems}
-            />
-            <BookList
-              booksList={props.booksList}
-              loadMoreHandler={props.loadMoreHandler}
-              totalItems={props.totalItems}
-              countItems={props.countItems}
-              loading={props.loading}
-              successLoad={props.successLoad}
-              bookHandler={props.bookHandler}
-            />
+            <InfoBlock />
+            <BookList />
           </>
-        : props.totalItems === 0 ? <Warning/> : <EmptyList/>}
+        : totalItems === 0 ? <Warning/> : <EmptyList/>}
     </>
   )
 }

@@ -1,7 +1,10 @@
 export function authorsCalibration(arr) {
+  if (typeof arr === 'string') return arr
+  if (!arr) return 'Author not specified'
+
   switch (arr.length) {
     case 0:
-      return 'author not specified'
+      return 'Author not specified'
     case 1:
       return arr.join('')
     case 2:
