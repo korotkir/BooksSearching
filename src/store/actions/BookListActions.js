@@ -18,6 +18,7 @@ export const fetchBookList = () => {
         return response.json()
       })
       .then((data) => {
+        console.log('fetch data', data.items)
         dispatch(setBooksList(data.items))
         dispatch(setCountItems(30))
         dispatch(setTotalItems(data.totalItems))
